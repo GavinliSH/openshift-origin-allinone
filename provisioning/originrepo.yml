@@ -1,0 +1,5 @@
+---
+- name: Installing centos-release-openshift-origin repository
+  yum: state=present name={{ item }}
+  with_items:
+  - centos-release-openshift-origin

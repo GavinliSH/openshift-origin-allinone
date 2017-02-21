@@ -1,0 +1,5 @@
+---
+- name: Injecting ansible inventory file for installing OpenShift
+  template:
+    src: files/inventory
+    dest: /etc/ansible/hosts

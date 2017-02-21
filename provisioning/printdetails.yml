@@ -1,0 +1,4 @@
+---
+- name: Printing Origin installation details
+  debug:
+    msg: "Login into openshift console at https://{{ ansible_eth0.ipv4.address }}:8443 with username/password as admin/admin"

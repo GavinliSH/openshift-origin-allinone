@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    ansible_env:
+      ANSIBLE_HOST_KEY_CHECKING: False
+  tasks:
+    - include: update.yml
+    - include: originrepo.yml
+    - include: prerequisites.yml
+    - include: sshkeys.yml
+    - include: configureinventory.yml
+    - include: installorigin.yml
+    - include: createusers.yml
+    - include: printdetails.yml

@@ -1,0 +1,27 @@
+[OSEv3:children]
+masters
+nodes
+etcd
+nfs
+
+[OSEv3:vars]
+# ansible options
+ansible_user=vagrant
+ansible_become=True
+
+# openshift options
+deployment_type=origin
+openshift_master_default_subdomain={{ ansible_eth0.ipv4.address }}.xip.io
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+
+[masters]
+{{ ansible_eth0.ipv4.address }}
+
+[etcd]
+{{ ansible_eth0.ipv4.address }}
+
+[nfs]
+{{ ansible_eth0.ipv4.address }}
+
+[nodes]
+{{ ansible_eth0.ipv4.address }} openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=True
