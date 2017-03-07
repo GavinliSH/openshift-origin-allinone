@@ -14,6 +14,10 @@ deployment_type=origin
 openshift_master_default_subdomain={{ ansible_eth0.ipv4.address }}.xip.io
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
 
+# Logging (EFK) options
+#openshift_hosted_logging_deploy=True
+#openshift_master_logging_public_url=https://kibana.{{ ansible_eth0.ipv4.address }}.xip.io 
+
 [masters]
 {{ ansible_eth0.ipv4.address }}
 
