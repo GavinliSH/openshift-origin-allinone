@@ -7,6 +7,9 @@ Vagrant.configure("2") do |config|
     domain.memory = 4068
     domain.cpus = 2
   end
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.storage :file, :size => '40G'
+  end
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "provisioning/main.yml"
   end

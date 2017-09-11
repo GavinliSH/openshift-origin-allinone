@@ -16,7 +16,8 @@ openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 
 
 # Logging (EFK) options
 #openshift_hosted_logging_deploy=True
-#openshift_master_logging_public_url=https://kibana.{{ ansible_eth0.ipv4.address }}.xip.io 
+#openshift_master_logging_public_url=https://kibana.{{ ansible_eth0.ipv4.address }}.xip.io
+openshift_disable_check=disk_availability,docker_storage,memory_availability
 
 [masters]
 {{ ansible_eth0.ipv4.address }}
