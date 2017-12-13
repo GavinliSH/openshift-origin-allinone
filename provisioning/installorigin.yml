@@ -2,8 +2,6 @@
 - name: Checking host connectivity
   shell: ansible all -m ping
   register: pingoutput
-  become: yes
-  become_user: vagrant
   environment: "{{ ansible_env }}"
 - name: Connecvity check output
   debug: msg="Ansible Connecvity Check output {{ pingoutput.stdout }}"
@@ -11,6 +9,4 @@
 - name: Installing OpenShift Origin and this step will take a while to complete
   shell: ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
   register: origininstallop
-  become: yes
-  become_user: vagrant
   environment: "{{ ansible_env }}"

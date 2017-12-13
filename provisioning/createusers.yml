@@ -1,5 +1,6 @@
 ---
 - name: Creating OSE User
   shell : htpasswd -bc /etc/origin/master/htpasswd admin admin
+  become: true
 - name: Granting cluster admin rights to admin user
   shell: oadm policy add-cluster-role-to-user cluster-admin admin

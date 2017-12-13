@@ -1,6 +1,7 @@
 ---
 - name: Installing pre-requisites
   yum: state=present name={{ item }}
+  become: yes
   with_items:
   - git
   - vim

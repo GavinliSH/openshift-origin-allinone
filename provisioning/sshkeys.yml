@@ -3,19 +3,11 @@
   file:
     path: ~/.ssh/id_rsa
     state: absent
-  become: yes
-  become_user: vagrant
 - name: Remove existing public key
   file:
     path: ~/.ssh/id_rsa.pub
     state: absent
-  become: yes
-  become_user: vagrant
 - name: Generating ssh-keys
   shell: ssh-keygen -N '' -f ~/.ssh/id_rsa
-  become: yes
-  become_user: vagrant
 - name: Adding the generated key to authorized keys
   shell: cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-  become: yes
-  become_user: vagrant
