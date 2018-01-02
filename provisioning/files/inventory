@@ -11,13 +11,34 @@ ansible_become=True
 
 # openshift options
 deployment_type=origin
-openshift_master_default_subdomain={{ ansible_eth0.ipv4.address }}.xip.io
+openshift_master_default_subdomain={{ ansible_eth0.ipv4.address }}.nip.io
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
 
+# install example imagestreams and templates
+openshift_install_examples=true
+
 # Logging (EFK) options
-#openshift_hosted_logging_deploy=True
-#openshift_master_logging_public_url=https://kibana.{{ ansible_eth0.ipv4.address }}.xip.io
+openshift_master_logging_public_url=https://kibana.{{ ansible_eth0.ipv4.address }}.nip.io
 openshift_disable_check=disk_availability,docker_storage,memory_availability
+
+# openshift registry options
+openshift_hosted_registry_storage_kind=nfs
+openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
+openshift_hosted_registry_storage_nfs_directory=/exports
+openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
+openshift_hosted_registry_storage_volume_name=registry
+openshift_hosted_registry_storage_volume_size=10Gi
+
+# deploy logging
+openshift_logging_install_logging=true
+openshift_logging_storage_kind=nfs
+openshift_logging_storage_access_modes=['ReadWriteOnce']
+openshift_logging_storage_nfs_directory=/exports
+openshift_logging_storage_nfs_options='*(rw,root_squash)'
+openshift_logging_storage_volume_name=logging
+openshift_logging_storage_volume_size=10Gi
+openshift_logging_storage_labels={'storage': 'logging'}
+
 
 [masters]
 {{ ansible_eth0.ipv4.address }}
